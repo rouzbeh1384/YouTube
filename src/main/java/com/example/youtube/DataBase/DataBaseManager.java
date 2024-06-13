@@ -1,5 +1,7 @@
 package com.example.youtube.DataBase;
 
+import com.example.youtube.Model.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,12 +10,14 @@ import java.sql.Statement;
 public class DataBaseManager {
 
 
-        Connection connection;
-        Statement statement;
+      static   Connection connection;
+      static   Statement statement;
+        private DataBaseManager() {
 
+        }
 
         /** Start connection in database  */
-        private void StrartConnection(){
+        private static void StartConnection(){
                 try {
                         Class.forName("com.mysql.cj.jdbc.Driver");
                         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hangman","root","");
@@ -25,7 +29,7 @@ public class DataBaseManager {
         }
 
         /**   End  connection in database  */
-        private void EncConnection(){
+        private  static void EncConnection(){
                 try {
                         if (connection != null) {
                                 statement.close();
@@ -37,6 +41,28 @@ public class DataBaseManager {
                 }
 
         }
+
+
+        public static User getUser(String name, String passWord ){
+
+                StartConnection();
+                String query="SELECT * from User WHERE (name,passWord)  ";
+
+
+
+
+
+
+
+                EncConnection();
+                return null;
+
+        }
+
+
+
+
+
 
 
 
