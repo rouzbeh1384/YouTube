@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="936.0" style="-fx-background-color: #272424;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.youtube.DarkMainController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#272424" height="515.0" layoutX="21.0" layoutY="61.0" stroke="#272424" strokeType="INSIDE" width="197.0" />
+      <Rectangle fx:id="homeBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="63.0" onMouseEntered="#homeHover" onMouseExited="#homeExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="historyBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="190.0" onMouseEntered="#historyHover" onMouseExited="#historyExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="subscriptionBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="21.0" layoutY="143.0" onMouseEntered="#subscriptionHover" onMouseExited="#subscriptionExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="shortBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="21.0" layoutY="103.0" onMouseEntered="#shortHover" onMouseExited="#shortExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="playListsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="224.0" onMouseEntered="#playListsHover" onMouseExited="#playListsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="watchLaterBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="259.0" onMouseEntered="#watchLaterHover" onMouseExited="#watchLaterExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="likedVideosBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="295.0" onMouseEntered="#likedVideosHover" onMouseExited="#likedVideosExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="TrendingBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="370.0" onMouseEntered="#TrendingHover" onMouseExited="#TrendingExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="musicBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="399.0" onMouseEntered="#musicHover" onMouseExited="#musicExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="gamingBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="432.0" onMouseEntered="#gamingHover" onMouseExited="#gamingExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="newsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="466.0" onMouseEntered="#newsHover" onMouseExited="#newsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="sportsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="499.0" onMouseEntered="#sportsHover" onMouseExited="#sportsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle fx:id="productsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="535.0" onMouseEntered="#productsHover" onMouseExited="#productsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="22.0" layoutY="14.0" stroke="#272424" strokeType="INSIDE" width="894.0" />
+      <ImageView fitHeight="26.0" fitWidth="46.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-4.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="272.0" layoutY="20.0" prefHeight="17.0" prefWidth="393.0" promptText="Search" style="-fx-background-color: #272424;" />
+      <ImageView fitHeight="26.0" fitWidth="33.0" layoutX="246.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-11.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="30.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-19.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="30.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-21.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="27.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="26.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-26.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="26.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-27.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="88.0" layoutY="68.0" prefHeight="26.0" prefWidth="65.0" text="Home" textFill="WHITE" />
+      <Label layoutX="88.0" layoutY="148.0" prefHeight="26.0" prefWidth="65.0" text="Subscription" textFill="WHITE">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="88.0" layoutY="108.0" prefHeight="26.0" prefWidth="65.0" text="Shorts" textFill="WHITE" />
+      <Label layoutX="85.0" layoutY="195.0" prefHeight="26.0" prefWidth="65.0" text="History" textFill="WHITE" />
+      <Label layoutX="84.0" layoutY="300.0" prefHeight="26.0" prefWidth="65.0" text="Liked videos" textFill="WHITE" />
+      <Label layoutX="84.0" layoutY="264.0" prefHeight="26.0" prefWidth="65.0" text="Watch later" textFill="WHITE" />
+      <Line endX="86.99998474121094" layoutX="131.0" layoutY="339.0" startX="-100.0" stroke="#9e9e9e" />
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="28.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-29.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="28.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="1.0" fitWidth="1.0" layoutX="75.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/svgexport-29.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="28.0" layoutY="438.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-32.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="28.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-33.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="28.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-35.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="27.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-25.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="30.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-20.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="85.0" layoutY="229.0" prefHeight="26.0" prefWidth="65.0" text="Playlists" textFill="WHITE" />
+      <Label layoutX="83.0" layoutY="375.0" prefHeight="26.0" prefWidth="65.0" text="Trending" textFill="WHITE" />
+      <Label layoutX="83.0" layoutY="404.0" prefHeight="26.0" prefWidth="65.0" text="Music" textFill="WHITE" />
+      <Label layoutX="83.0" layoutY="437.0" prefHeight="26.0" prefWidth="65.0" text="Gaming" textFill="WHITE" />
+      <Label layoutX="83.0" layoutY="471.0" prefHeight="26.0" prefWidth="65.0" text="News" textFill="WHITE" />
+      <Label layoutX="83.0" layoutY="543.0" prefHeight="26.0" prefWidth="65.0" text="Podcasts" textFill="WHITE" />
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="27.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-34.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="83.0" layoutY="504.0" prefHeight="26.0" prefWidth="65.0" text="Sports" textFill="WHITE" />
+      <ImageView fitHeight="37.0" fitWidth="66.0" layoutX="65.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/darkImages/svgexport-7.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="29.0" layoutY="339.0" prefHeight="26.0" prefWidth="102.0" text="Explor" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Line endX="86.99998474121094" layoutX="127.0" layoutY="189.0" startX="-100.0" stroke="#9e9e9e" />
+   </children>
+</AnchorPane>
