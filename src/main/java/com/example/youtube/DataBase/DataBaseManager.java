@@ -47,7 +47,7 @@ public class DataBaseManager {
 
         /** get method  */
 
-        //getUser
+        // getUser form database
         public static User getUser(String name, String passWord) {
             StartConnection();
             String query = "SELECT * FROM User WHERE username='%s' AND passWord='%s'";
@@ -73,14 +73,35 @@ public class DataBaseManager {
             return null;
         }
 
-    //getChannel
-        public static Channel getChannel(String name, String passWord ){
-
+        //getChannel with  0= username  1=UUID
+        //table  ID_chanel	Name	information	image	username
+        public static Channel getChannel(String name,int number){
             StartConnection();
-            String query="SELECT * from User WHERE (name,passWord)  ";
+            String query;
+            if(number==0) {
+                query= "SELECT * FROM chanel WHERE username='%s'";
+            }
+            else{
+                query="SELECT * FROM chanel WHERE ID_chanel='%s'";
+            }
+
+            try {
+                query=String.format(query,name);
+
+                ResultSet rs = statement.executeQuery(query);
+                if (rs.next()) {
+                    String username = rs.getString("username");
+                    String image = rs.getString("image");
+                    String ID_chanel = rs.getString("ID_chanel");
+                    String information = rs.getString("information");
+                    EncConnection();
+                    return new Channel(ID_chanel,name,information,username);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             EncConnection();
             return null;
-
         }
 
         //this is for get video from
@@ -119,6 +140,7 @@ public class DataBaseManager {
 
 
         /** insert method*/
+        //insert User in chanel TODO check in User
         public static void insertUser(User  user){
 
             StartConnection();
@@ -138,6 +160,25 @@ public class DataBaseManager {
 
         }
 
+    //insert chanel
+    // ID_chanel	Name	information	image	username
+        public static void insertChanel (String Name ,String username,String ID_chanel,String image,String information){
+
+
+            StartConnection();
+            String query ="INSERT INTO chanel (ID_chanel,Name,information,image,username) VALUES ('%s','%s','%s','%s','%s')";
+            query=String.format(query,ID_chanel,Name,information,image,username);
+            try{
+
+                statement.execute(query);
+
+            }catch (Exception e){
+                e.getMessage();
+            }
+
+
+            EncConnection();
+        }
 
 
 
