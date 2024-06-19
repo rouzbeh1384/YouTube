@@ -2,6 +2,7 @@ package com.example.youtube.DataBase;
 
 import com.example.youtube.Model.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -109,9 +110,12 @@ public class DataBaseManager {
             ArrayList<Video> videos=new ArrayList<>();
             String query;
             StartConnection();
-            query="SELECT * FROM ( ID_video,Chanel_ID,time_uplode,view,PlayTime,like,Dis_like,name,discribe)VALUSE ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+            query="SELECT * FROM video ";
+//            query="SELECT `ID_video`, `Chanel_ID`, `time_uplode`, `view`, `PlayTime`, `like`, `Dis_like`, `name`, `information` FROM `video` WHERE 1";
+            query=String.format(query,chanel);
             try{
                 ResultSet resultSet=statement.executeQuery(query);
+                System.out.println(resultSet.getFetchSize());
                 while (resultSet.next()){
                 String  IDVidoe=   resultSet.getString("ID_video");
                 String Chanel_ID =   resultSet.getString("Chanel_ID");
@@ -123,7 +127,7 @@ public class DataBaseManager {
                 String  name=   resultSet.getString("name");
                 String information=        resultSet.getString("information");
 
-                videos.add(new Video(IDVidoe,name ,information,time_uplode,playTime,like,Dis_like,view));
+                videos.add(new Video(IDVidoe,name ,information,time_uplode,playTime,like,Dis_like,view,Chanel_ID));
                 }
                 return videos;
             }catch (Exception e){
@@ -199,13 +203,26 @@ public class DataBaseManager {
             EncConnection();
         }
         //ID_video	Chanel_ID	time_uplode	view	PlayTime	like	Dis_like	name	information
+
+
+
+
         public static void insertVideo(Video video){
             StartConnection();
             String query;
-            query="INSERT INTO video (ID_video,Chanel_ID,time_uplode,view,PlayTime,like,Dis_like,name,information) VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+//            query="INSERT INTO video (ID_video,Chanel_ID,time_uplode,view,PlayTime,like,Dis_like,name,information) VALUES ('%s','%s','%s',%s,%s,%s,%s)";
+            query="INSERT INTO video (ID_video, Chanel_ID, time_uplode, view, PlayTime, like, Dis_like, name, information) VALUES ('%s','%s','%s','%d','%d','%d','%d','%s','%s')";
 
 
 
+//            query=String.format(query,video.getID(),video.getIDChanel(),"12",video.getView()
+//                    ,video.getDuration(),video.getLike(),video.getDeslike(),video.getName(),video.getDescription());
+              query=String.format(query,"2112","112","112",112,112,121,112,"1112","112");
+            try {
+                statement.execute(query);
+            }catch ( SQLException ee){
+                throw new RuntimeException(ee);
+            }
 
             EncConnection();
         }
