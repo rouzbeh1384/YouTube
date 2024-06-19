@@ -12,23 +12,23 @@ public class Video {
     private String ID;
     private LocalDate uploadTime;
     private Integer view;
-    private LocalDate duration; //??
+    private Integer duration; //??
     private Integer like;
     private Integer deslike;
     private String name;
     private String description;
-    private ArrayList<String> hashtags;
-    private Video(String ID,String name,String description,String uplaodTime,
-                  String duration,Integer like,Integer deslike,Integer view,String hashtags) {
+    private ArrayList<String> category;
+    public Video(String ID,String name,String description,String uplaodTime,
+                  Integer duration,Integer like,Integer deslike,Integer view) {
         this.name = name;
         this.description = description;
         this.view = view;
         this.like = like;
         this.deslike = deslike;
         this.uploadTime = LocalDate.parse(uplaodTime);
-        this.duration=LocalDate.parse(duration); //format???
+        this.duration=duration; //format???
         this.ID=ID;
-        this.hashtags=new ArrayList<>(Arrays.asList(hashtags.split(",")));
+
     }
 
     public String getID() {
@@ -55,7 +55,7 @@ public class Video {
         return view;
     }
 
-    public LocalDate getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
@@ -64,7 +64,7 @@ public class Video {
     }
 
     public ArrayList<String> getHashtagsList() {
-        return hashtags;
+        return category;
     }
 
     public void editName(String name) {
@@ -88,14 +88,14 @@ public class Video {
     }
 
     public void addHashtags(String hashtag) {
-        this.hashtags.add(hashtag);
+        this.category.add(hashtag);
     }
     public void removeHashtag(String hashtag){
-        this.hashtags.remove(hashtag);
+        this.category.remove(hashtag);
     }
     public String getHashtagString(){
         String hashtags="";
-        for(String hashtag : this.hashtags){
+        for(String hashtag : this.category){
              hashtags += hashtag+",";
         }
         return (hashtags.substring(0,hashtags.length()-1)); // -1 or -2 ??
