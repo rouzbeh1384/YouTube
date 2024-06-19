@@ -75,7 +75,7 @@ public class DataBaseManager {
 
         //getChannel with  0= username  1=UUID
         //table  ID_chanel	Name	information	image	username
-        public static Channel getChannel(String name,int number){
+        public static Channel getChannel(String identifier,int number){
             StartConnection();
             String query;
             if(number==0) {
@@ -86,16 +86,17 @@ public class DataBaseManager {
             }
 
             try {
-                query=String.format(query,name);
+                query=String.format(query,identifier);
 
                 ResultSet rs = statement.executeQuery(query);
                 if (rs.next()) {
                     String username = rs.getString("username");
+                    String name =rs.getString("Name");
                     String image = rs.getString("image");
                     String ID_chanel = rs.getString("ID_chanel");
                     String information = rs.getString("information");
                     EncConnection();
-                    return new Channel(ID_chanel,name,information,username);
+                    return new Channel(ID_chanel,name,information,username,image);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
