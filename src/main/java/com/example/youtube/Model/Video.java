@@ -1,12 +1,7 @@
 package com.example.youtube.Model;
 
-import java.text.DateFormat;
-import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 public class Video {
     private String ID;
@@ -18,8 +13,9 @@ public class Video {
     private String name;
     private String description;
     private ArrayList<String> category;
+    private String IDChanel;
     public Video(String ID,String name,String description,String uplaodTime,
-                  Integer duration,Integer like,Integer deslike,Integer view) {
+                  Integer duration,Integer like,Integer deslike,Integer view,String idchal) {
         this.name = name;
         this.description = description;
         this.view = view;
@@ -28,6 +24,8 @@ public class Video {
         this.uploadTime = LocalDate.parse(uplaodTime);
         this.duration=duration; //format???
         this.ID=ID;
+        setIDChanel(idchal);
+
 
     }
 
@@ -51,11 +49,11 @@ public class Video {
         return like;
     }
 
-    public Integer getView() {
+    public int  getView() {
         return view;
     }
 
-    public Integer getDuration() {
+    public int  getDuration() {
         return duration;
     }
 
@@ -99,5 +97,13 @@ public class Video {
              hashtags += hashtag+",";
         }
         return (hashtags.substring(0,hashtags.length()-1)); // -1 or -2 ??
+    }
+
+    public String getIDChanel() {
+        return IDChanel;
+    }
+
+    public void setIDChanel(String IDChanel) {
+        this.IDChanel = IDChanel;
     }
 }
