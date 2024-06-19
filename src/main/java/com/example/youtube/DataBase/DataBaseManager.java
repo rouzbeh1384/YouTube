@@ -41,10 +41,6 @@ public class DataBaseManager {
                 }
 
         }
-
-
-
-
         /** get method  */
 
         // getUser form database
@@ -104,15 +100,37 @@ public class DataBaseManager {
             EncConnection();
             return null;
         }
-
-        //this is for get video from
-        public static ArrayList<Video> getList_video (String name, String passWord ){
-
+        //this is for get video from chanel ALL
+        //ID_video	Chanel_ID	time_uplode	view	PlayTime	like	Dis_like	name	information	category
+        //                      1       2           3
+        //    public Video(String ID,String name,String description,String uplaodTime,
+        //                  Integer duration,Integer like,Integer deslike,Integer view)
+    public static ArrayList<Video> getList_video (String chanel  ){
+            ArrayList<Video> videos=new ArrayList<>();
+            String query;
             StartConnection();
-            //TODO  get name and send the list of video
+            query="SELECT * FROM ( ID_video,Chanel_ID,time_uplode,view,PlayTime,like,Dis_like,name,discribe)VALUSE ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+            try{
+                ResultSet resultSet=statement.executeQuery(query);
+                while (resultSet.next()){
+                String  IDVidoe=   resultSet.getString("ID_video");
+                String Chanel_ID =   resultSet.getString("Chanel_ID");
+                String  time_uplode=   resultSet.getString("time_uplode");
+                int view =   resultSet.getInt("view");
+                int playTime =   resultSet.getInt("PlayTime");
+                int  like=   resultSet.getInt("like");
+                int  Dis_like =   resultSet.getInt("Dis_like");
+                String  name=   resultSet.getString("name");
+                String information=        resultSet.getString("information");
+
+                videos.add(new Video(IDVidoe,name ,information,time_uplode,playTime,like,Dis_like,view));
+                }
+                return videos;
+            }catch (Exception e){
+                e.getMessage();
+            }
             EncConnection();
             return null;
-
         }
         public static ArrayList<Comment> getListComment(){
 
@@ -176,6 +194,17 @@ public class DataBaseManager {
             }catch (Exception e){
                 e.getMessage();
             }
+
+
+            EncConnection();
+        }
+        //ID_video	Chanel_ID	time_uplode	view	PlayTime	like	Dis_like	name	information
+        public static void insertVideo(Video video){
+            StartConnection();
+            String query;
+            query="INSERT INTO video (ID_video,Chanel_ID,time_uplode,view,PlayTime,like,Dis_like,name,information) VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+
+
 
 
             EncConnection();
