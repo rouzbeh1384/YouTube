@@ -4,16 +4,16 @@ public class Channel {
     private String id;
     private String name;
     private String description;
-    private Byte image;  //?????
+    private String image;  //?????
 
     private String username;
 
-    public Channel(String id,String name,String description,String username){
+    public Channel(String id,String name,String description,String username,String image){
         this.id=id;
         this.description=description;
         this.name=name;
         this.username=username;
-        // image ?????
+         this.image=image ; //?????
     }
 
     public String getId() {
