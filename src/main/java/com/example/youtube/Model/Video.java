@@ -13,9 +13,11 @@ public class Video {
     private String name;
     private String description;
     private ArrayList<String> category;
+    private String path;
+
     private String IDChanel;
-    public Video(String ID,String name,String description,String uplaodTime,
-                  Integer duration,Integer like,Integer deslike,Integer view,String idchal) {
+    public Video(String path,String ID,String idchal,String name,String description,String uplaodTime,
+                  Integer duration,Integer like,Integer deslike,Integer view) {
         this.name = name;
         this.description = description;
         this.view = view;
@@ -24,8 +26,9 @@ public class Video {
         this.uploadTime = LocalDate.parse(uplaodTime);
         this.duration=duration; //format???
         this.ID=ID;
-        setIDChanel(idchal);
-
+        this.IDChanel=idchal;
+        this.setPath(path);
+        this.category=new ArrayList<>();
 
     }
 
@@ -62,7 +65,7 @@ public class Video {
     }
 
     public ArrayList<String> getHashtagsList() {
-        return category;
+        return getCategory();
     }
 
     public void editName(String name) {
@@ -86,14 +89,14 @@ public class Video {
     }
 
     public void addHashtags(String hashtag) {
-        this.category.add(hashtag);
+        this.getCategory().add(hashtag);
     }
     public void removeHashtag(String hashtag){
-        this.category.remove(hashtag);
+        this.getCategory().remove(hashtag);
     }
     public String getHashtagString(){
         String hashtags="";
-        for(String hashtag : this.category){
+        for(String hashtag : this.getCategory()){
              hashtags += hashtag+",";
         }
         return (hashtags.substring(0,hashtags.length()-1)); // -1 or -2 ??
@@ -105,5 +108,21 @@ public class Video {
 
     public void setIDChanel(String IDChanel) {
         this.IDChanel = IDChanel;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public ArrayList<String> getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category.add( category);
     }
 }
