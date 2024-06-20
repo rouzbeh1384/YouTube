@@ -70,6 +70,7 @@ public class DataBaseManager {
             return null;
         }
 
+
         //getChannel with  0= username  1=UUID
         //table  ID_chanel	Name	information	image	username
         public static Channel getChannel(String identifier,int number){
@@ -101,41 +102,44 @@ public class DataBaseManager {
             EncConnection();
             return null;
         }
+
+
+
         //this is for get video from chanel ALL
         //ID_video	Chanel_ID	time_uplode	view	PlayTime	like	Dis_like	name	information	category
         //                      1       2           3
         //    public Video(String ID,String name,String description,String uplaodTime,
         //                  Integer duration,Integer like,Integer deslike,Integer view)
-    public static ArrayList<Video> getList_video (String chanel  ){
-            ArrayList<Video> videos=new ArrayList<>();
-            String query;
-            StartConnection();
-            query="SELECT * FROM video ";
-//            query="SELECT `ID_video`, `Chanel_ID`, `time_uplode`, `view`, `PlayTime`, `like`, `Dis_like`, `name`, `information` FROM `video` WHERE 1";
-            query=String.format(query,chanel);
-            try{
-                ResultSet resultSet=statement.executeQuery(query);
-                System.out.println(resultSet.getFetchSize());
-                while (resultSet.next()){
-                String  IDVidoe=   resultSet.getString("ID_video");
-                String Chanel_ID =   resultSet.getString("Chanel_ID");
-                String  time_uplode=   resultSet.getString("time_uplode");
-                int view =   resultSet.getInt("view");
-                int playTime =   resultSet.getInt("PlayTime");
-                int  like=   resultSet.getInt("like");
-                int  Dis_like =   resultSet.getInt("Dis_like");
-                String  name=   resultSet.getString("name");
-                String information=        resultSet.getString("information");
+    public static ArrayList<Video> getList_video (String chanel ){
+        ArrayList<Video> videos = new ArrayList<>();
+        StartConnection();
 
-//                videos.add(new Video(IDVidoe,name ,information,time_uplode,playTime,like,Dis_like,view,Chanel_ID));
-                }
-                return videos;
-            }catch (Exception e){
-                e.getMessage();
+        String query = "SELECT * FROM video WHERE Chanel_ID=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, chanel);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                String path = resultSet.getString("path");
+                String ID_video = resultSet.getString("ID_video");
+                String Chanel_ID = resultSet.getString("Chanel_ID");
+                String time_uplode = resultSet.getString("time_uplode");
+                int view = resultSet.getInt("view");
+                int PlayTime = resultSet.getInt("PlayTime");
+                int like = resultSet.getInt("like");
+                int Dis_like = resultSet.getInt("Dis_like");
+                String name = resultSet.getString("name");
+                String information = resultSet.getString("information");
+                videos.add(new Video(path, ID_video, Chanel_ID, name, information, time_uplode, PlayTime, like, Dis_like, view));
             }
             EncConnection();
-            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+        return videos;
+    }
+
+
         public static ArrayList<Comment> getListComment(String video_ID ){
 
             //TODO 2 way for this 1-add column in comment table or join with user table
@@ -143,7 +147,6 @@ public class DataBaseManager {
             String query="SELECT * FROM  comment WHERE ID_video=? " ;
             ArrayList<Comment>comments=new ArrayList<>();
             try {
-                //comment		witerer	ID_video	like	dislike
                ResultSet resultSet= statement.executeQuery(query);
                while (resultSet .next()){
                     String comment =resultSet.getString("comment");
@@ -198,9 +201,7 @@ public class DataBaseManager {
                 int Dis_like = resultSet.getInt("Dis_like");
                 String name = resultSet.getString("name");
                 String information = resultSet.getString("information");
-                String categr=resultSet.getString("category");
-//              videos.add(new Video(path, ID_video, Chanel_ID, name, information, time_uplode, PlayTime, like, Dis_like, view));
-                System.out.println((categr+ path+"\t"+ ID_video+"\t"+ Chanel_ID+"\t"+ name+"\t"+ information+"\t"+ time_uplode+ PlayTime+ like+ Dis_like+ view));
+              videos.add(new Video(path, ID_video, Chanel_ID, name, information, time_uplode, PlayTime, like, Dis_like, view));
             }
             EncConnection();
         } catch (Exception e) {
@@ -237,13 +238,12 @@ public class DataBaseManager {
         }
 
         //insert chanel complete
-        // ID_chanel	Name	information	image	username
-        public static void insertChanel (String Name ,String username,String ID_chanel,String image,String information){
-
+        //String id,String name,String description,String username,String image
+        public static void insertChanel (Channel channel){
 
             StartConnection();
             String query ="INSERT INTO chanel (ID_chanel,Name,information,image,username) VALUES ('%s','%s','%s','%s','%s')";
-            query=String.format(query,ID_chanel,Name,information,image,username);
+            query=String.format(query,channel.getId(),channel.getName(),channel.getDescription(),channel.getImage(),channel.getUsername());
             try{
 
                 statement.execute(query);
@@ -298,6 +298,80 @@ public class DataBaseManager {
             }
             EncConnection();
         }
+
+
+
+
+        /**  delete */
+        public static void deleteVideo(String idV,String idC){
+
+            StartConnection();
+            String query="DELETE FROM video WHERE ID_video ='%s' AND    Chanel_ID='%s' ";
+            query=String.format(query,idV,idC);
+            try {
+                statement.execute(query);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
+            EncConnection();
+
+
+        }
+
+        public static void deleteUser(String idU,String passWord){
+
+        StartConnection();
+        String query="DELETE FROM user WHERE IDuser ='%s' AND passWord='%s' ";
+        query=String.format(query,idU,passWord);
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        EncConnection();
+    }
+
+        public static void deleteChanel(String idc){
+        StartConnection();
+        String query="DELETE FROM Chanel WHERE ID_chanel ='%s'  ";
+        query=String.format(query,idc);
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        EncConnection();
+    }
+
+        public static void deletePlayList(String idp){
+            StartConnection();
+            String query="DELETE FROM playlist WHERE ID_Playlist ='%s'  AND   ";
+            query=String.format(query,idp);
+            try {
+                statement.execute(query);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            EncConnection();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
