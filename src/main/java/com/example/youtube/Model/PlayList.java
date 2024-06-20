@@ -6,7 +6,7 @@ public class PlayList {
     private String ID;
     private String channelID;
     //videos???
-    private PlayList(String name,String ID,String channelID,String description){
+    public PlayList(String name, String ID, String channelID, String description){
         this.description=description;
         this.ID=ID;
         this.name=name;
