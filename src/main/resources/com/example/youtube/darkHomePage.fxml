@@ -15,19 +15,19 @@
       
       <AnchorPane fx:id="sideBar" layoutX="25.0" layoutY="51.0" prefHeight="515.0" prefWidth="197.0" visible="false">
          <children>
-            <Rectangle fx:id="productsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="470.0" onMouseEntered="#productsHover" onMouseExited="#productsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="sportsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="431.0" onMouseEntered="#sportsHover" onMouseExited="#sportsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="newsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="3.0" layoutY="399.0" onMouseEntered="#newsHover" onMouseExited="#newsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="gamingBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="372.0" onMouseEntered="#gamingHover" onMouseExited="#gamingExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="musicBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="5.0" layoutY="346.0" onMouseEntered="#musicHover" onMouseExited="#musicExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="TrendingBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="313.0" onMouseEntered="#TrendingHover" onMouseExited="#TrendingExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="likedVideosBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="239.0" onMouseEntered="#likedVideosHover" onMouseExited="#likedVideosExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="watchLaterBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="201.0" onMouseEntered="#watchLaterHover" onMouseExited="#watchLaterExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="playListsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="165.0" onMouseEntered="#playListsHover" onMouseExited="#playListsExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="shortBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="45.0" onMouseEntered="#shortHover" onMouseExited="#shortExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="subscriptionBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="9.0" onMouseEntered="#subscriptionHover" onMouseExited="#subscriptionExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="historyBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="78.0" onMouseEntered="#historyHover" onMouseExited="#historyExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
-            <Rectangle fx:id="homeBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="130.0" onMouseEntered="#homeHover" onMouseExited="#homeExitMouse" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="productsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="470.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="sportsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="431.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="newsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="3.0" layoutY="399.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="gamingBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="372.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="musicBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="5.0" layoutY="346.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="TrendingBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="313.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="likedVideosBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="239.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="watchLaterBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="201.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="playListsBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="165.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="shortBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="45.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="subscriptionBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="9.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="historyBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutX="-1.0" layoutY="78.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
+            <Rectangle fx:id="homeBackGround" arcHeight="5.0" arcWidth="5.0" fill="#272424" height="37.0" layoutY="130.0" stroke="#272424" strokeType="INSIDE" style="-fx-arc-width: 30; -fx-arc-height: 30;" width="197.0" />
             <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="13.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/darkImages/svgexport-35.png" />
@@ -140,6 +140,34 @@
             <Image url="@Images/darkImages/svgexport-11.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="firstSideBar" layoutX="30.0" layoutY="64.0" prefHeight="292.0" prefWidth="46.0">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="6.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/darkImages/svgexport-19.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="8.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/darkImages/svgexport-20.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="34.0" layoutX="6.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/darkImages/svgexport-21.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="34.0" layoutX="6.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/darkImages/svgexport-22.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="7.0" layoutY="48.0" text="Home" textFill="WHITE" />
+            <Label layoutX="7.0" layoutY="110.0" text="Shorts" textFill="WHITE" />
+            <Label layoutX="-10.0" layoutY="170.0" text="Subscription" textFill="WHITE" />
+            <Label layoutX="13.0" layoutY="230.0" text="You" textFill="WHITE" />
+         </children>
+      </AnchorPane>
    </children>
    
 </AnchorPane>

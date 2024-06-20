@@ -41,6 +41,9 @@ public class DarkMainController {
     @FXML
     private AnchorPane sideBar;
     private boolean isSideBarOn = false;
+    @FXML
+    private AnchorPane firstSideBar;
+    private boolean isFirstSideBarOn;
     private Parent root;
     private Stage stage = new Stage();
 
@@ -62,136 +65,25 @@ public class DarkMainController {
     protected void sideBarBtnClick() {
         sideBar.setVisible(!isSideBarOn);
         isSideBarOn = !isSideBarOn;
+        firstSideBar.setVisible(isFirstSideBarOn);
+        isFirstSideBarOn = !isFirstSideBarOn;
+    }
+    private void handleRectangleHover(Rectangle rectangle, Paint hoverColor, Paint normalColor) {
+        rectangle.setOnMouseEntered(event -> rectangle.setFill(hoverColor));
+        rectangle.setOnMouseExited(event -> rectangle.setFill(normalColor));
     }
 
     @FXML
-    public void homeHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        homeBackGround.setFill(gray);
-    }
-    @FXML
-    public void homeExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        homeBackGround.setFill(gray);
-    }
-    @FXML
-    public void shortHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        shortBackGround.setFill(gray);
-    }
-    @FXML
-    public void shortExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        shortBackGround.setFill(gray);
-    }
-    @FXML
-    public void subscriptionHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        subscriptionBackGround.setFill(gray);
-    }
-    @FXML
-    public void subscriptionExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        subscriptionBackGround.setFill(gray);
-    }
-    @FXML
-    public void historyHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        historyBackGround.setFill(gray);
-    }
-    @FXML
-    public void historyExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        historyBackGround.setFill(gray);
-    }
-    @FXML
-    public void playListsHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        playListsBackGround.setFill(gray);
-    }
-    @FXML
-    public void playListsExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        playListsBackGround.setFill(gray);
-    }
-    @FXML
-    public void watchLaterHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        watchLaterBackGround.setFill(gray);
-    }
-    @FXML
-    public void watchLaterExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        watchLaterBackGround.setFill(gray);
-    }
-    @FXML
-    public void likedVideosHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        likedVideosBackGround.setFill(gray);
-    }
-    @FXML
-    public void likedVideosExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        likedVideosBackGround.setFill(gray);
-    }
-    @FXML
-    public void TrendingHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        TrendingBackGround.setFill(gray);
-    }
-    @FXML
-    public void TrendingExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        TrendingBackGround.setFill(gray);
-    }
-    @FXML
-    public void musicHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        musicBackGround.setFill(gray);
-    }
-    @FXML
-    public void musicExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        musicBackGround.setFill(gray);
-    }
-    @FXML
-    public void gamingHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        gamingBackGround.setFill(gray);
-    }
-    @FXML
-    public void gamingExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        gamingBackGround.setFill(gray);
-    }
-    @FXML
-    public void newsHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        newsBackGround.setFill(gray);
-    }
-    @FXML
-    public void newsExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        newsBackGround.setFill(gray);
-    }
-    @FXML
-    public void sportsHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        sportsBackGround.setFill(gray);
-    }
-    @FXML
-    public void sportsExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        sportsBackGround.setFill(gray);
-    }
-    @FXML
-    public void productsHover() {
-        Paint gray = Paint.valueOf("#7F7C7C");
-        productsBackGround.setFill(gray);
-    }
-    @FXML
-    public void productsExitMouse() {
-        Paint gray = Paint.valueOf("#272424");
-        productsBackGround.setFill(gray);
+    public void initialize() {
+        Paint hoverColor = Paint.valueOf("#7F7C7C");
+        Paint normalColor = Paint.valueOf("#272424");
+        Rectangle[] rectangles = {
+                homeBackGround, shortBackGround, subscriptionBackGround, historyBackGround,
+                watchLaterBackGround, likedVideosBackGround, TrendingBackGround, musicBackGround,
+                gamingBackGround, newsBackGround, sportsBackGround, productsBackGround, playListsBackGround
+        };
+        for (Rectangle rectangle : rectangles) {
+            handleRectangleHover(rectangle, hoverColor, normalColor);
+        }
     }
 }
