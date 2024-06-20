@@ -4,7 +4,7 @@ public class Channel {
     private String id;
     private String name;
     private String description;
-    private String image;  //?????
+    private String image;
 
     private String username;
 
@@ -13,7 +13,7 @@ public class Channel {
         this.description=description;
         this.name=name;
         this.username=username;
-         this.image=image ; //?????
+        this.setImage(image);
     }
 
     public String getId() {
@@ -45,5 +45,13 @@ public class Channel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
