@@ -127,7 +127,7 @@ public class DataBaseManager {
                 String  name=   resultSet.getString("name");
                 String information=        resultSet.getString("information");
 
-                videos.add(new Video(IDVidoe,name ,information,time_uplode,playTime,like,Dis_like,view,Chanel_ID));
+//                videos.add(new Video(IDVidoe,name ,information,time_uplode,playTime,like,Dis_like,view,Chanel_ID));
                 }
                 return videos;
             }catch (Exception e){
@@ -151,17 +151,77 @@ public class DataBaseManager {
             return null;
 
         }
-        public static ArrayList<Video> getListVideoByca(){
+        //Path
+        //ID_video
+        //Chanel_ID
+        //time_uplode
+        //view
+        //PlayTime
+        //like
+        //Dis_like
+        //name
+        //information
+//        public static ArrayList<Video> getListVideoByCategory(String category) {
+//            ArrayList<Video> videos = new ArrayList<>();
+//            StartConnection();
+//
+//            String query = "SELECT * FROM video RIGHT JOIN category_video ON video.ID_video = category_video.ID_vidoe WHERE category_video.ID = ?";
+//            try {
+//                PreparedStatement ps = connection.prepareStatement(query);
+//                ps.setString(1, category);
+//                ResultSet resultSet = ps.executeQuery();
+//                while (resultSet.next()) {
+//                    String path = resultSet.getString("path");
+//                    String ID_video = resultSet.getString("ID_video");
+//                    String Chanel_ID = resultSet.getString("Chanel_ID");
+//                    String time_uplode = resultSet.getString("time_uplode");
+//                    int view = resultSet.getInt("view");
+//                    int PlayTime = resultSet.getInt("PlayTime");
+//                    int like = resultSet.getInt("like");
+//                    int Dis_like = resultSet.getInt("Dis_like");
+//                    String name = resultSet.getString("name");
+//                    String information = resultSet.getString("information");
+//                    videos.add(new Video(path, ID_video, Chanel_ID, name, information, time_uplode, PlayTime, like, Dis_like, view));
+//                }
+//                EncConnection();
+//            } catch (Exception e) {
+//                // Handle the exception properly
+//                throw new RuntimeException(e);
+//            }
+//            return videos;
+//        }
 
-            StartConnection();
-            String query="SELECT * from User WHERE (name,passWord)  ";
+
+    public static ArrayList<Video> getListVideoByCategory(String category) {
+        ArrayList<Video> videos = new ArrayList<>();
+        StartConnection();
+
+        String query = "SELECT * FROM video   JOIN  category_video ON video.ID_video = category_video.ID_video WHERE category_video.category=? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, category);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                String path = resultSet.getString("path");
+                String ID_video = resultSet.getString("ID_video");
+                String Chanel_ID = resultSet.getString("Chanel_ID");
+                String time_uplode = resultSet.getString("time_uplode");
+                int view = resultSet.getInt("view");
+                int PlayTime = resultSet.getInt("PlayTime");
+                int like = resultSet.getInt("like");
+                int Dis_like = resultSet.getInt("Dis_like");
+                String name = resultSet.getString("name");
+                String information = resultSet.getString("information");
+                String categr=resultSet.getString("category");
+//              videos.add(new Video(path, ID_video, Chanel_ID, name, information, time_uplode, PlayTime, like, Dis_like, view));
+                System.out.println((categr+ path+"\t"+ ID_video+"\t"+ Chanel_ID+"\t"+ name+"\t"+ information+"\t"+ time_uplode+ PlayTime+ like+ Dis_like+ view));
+            }
             EncConnection();
-            return null;
-
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-
-
+        return videos;
+    }
         /** insert method*/
         //insert User in chanel TODO check in User
         public static void insertUser(User  user){
@@ -183,8 +243,8 @@ public class DataBaseManager {
 
         }
 
-    //insert chanel
-    // ID_chanel	Name	information	image	username
+        //insert chanel complete
+        // ID_chanel	Name	information	image	username
         public static void insertChanel (String Name ,String username,String ID_chanel,String image,String information){
 
 
@@ -202,44 +262,49 @@ public class DataBaseManager {
 
             EncConnection();
         }
-        //ID_video	Chanel_ID	time_uplode	view	PlayTime	like	Dis_like	name	information
 
 
 
+        //insert video in
+        public static void insertVideo(Video video) {
 
-        public static void insertVideo(Video video){
             StartConnection();
-            String query;
-//            query="INSERT INTO video (ID_video,Chanel_ID,time_uplode,view,PlayTime,like,Dis_like,name,information) VALUES ('%s','%s','%s',%s,%s,%s,%s)";
-            query="INSERT INTO video (ID_video, Chanel_ID, time_uplode, view, PlayTime, like, Dis_like, name, information) VALUES ('%s','%s','%s','%d','%d','%d','%d','%s','%s')";
+            for (String x:video.getHashtagsList()) {
+                String query1 = "INSERT INTO category_video (category,ID_video) " +
+                        "VALUES (?,?)";
+                try {
+                    PreparedStatement statement = connection.prepareStatement(query1);
+                    statement.setString(1,x);
+                    statement.setString(2,video.getID());
+                    statement.execute();
 
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
-
-//            query=String.format(query,video.getID(),video.getIDChanel(),"12",video.getView()
-//                    ,video.getDuration(),video.getLike(),video.getDeslike(),video.getName(),video.getDescription());
-              query=String.format(query,"2112","112","112",112,112,121,112,"1112","112");
-            try {
-                statement.execute(query);
-            }catch ( SQLException ee){
-                throw new RuntimeException(ee);
             }
 
+
+            String query = "INSERT INTO video (Path, ID_video, Chanel_ID, time_uplode, view, PlayTime, `like`, Dis_like, name, information) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, video.getPath());
+                statement.setString(2, video.getID());
+                statement.setString(3, video.getIDChanel());
+                statement.setString(4, String.valueOf(video.getUploadTime()));
+                statement.setInt(5, video.getView());
+                statement.setInt(6, video.getDuration());
+                statement.setInt(7, video.getLike());
+                statement.setInt(8, (int) video.getDeslike());
+                statement.setString(9, video.getName());
+                statement.setString(10, video.getDescription());
+                statement.execute();
+            } catch (SQLException ee) {
+                throw new RuntimeException(ee);
+            }
             EncConnection();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
