@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -41,6 +42,9 @@ public class HelloController {
     private Rectangle playListsBackGround;
     @FXML
     private Button a;
+    @FXML
+    private AnchorPane sideBar;
+    private boolean isSideBarOn = false;
     private Parent root;
     private Stage stage = new Stage();
 
@@ -55,6 +59,11 @@ public class HelloController {
         stage.setTitle("Login Page");
         stage.show();
 
+    }
+    @FXML
+    protected void sideBarBtnClick() {
+        sideBar.setVisible(!isSideBarOn);
+        isSideBarOn = !isSideBarOn;
     }
 
     @FXML
