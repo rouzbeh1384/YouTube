@@ -136,60 +136,46 @@ public class DataBaseManager {
             EncConnection();
             return null;
         }
-        public static ArrayList<Comment> getListComment(){
+        public static ArrayList<Comment> getListComment(String video_ID ){
 
+            //TODO 2 way for this 1-add column in comment table or join with user table
             StartConnection();
-            String query="SELECT * from User WHERE (name,passWord)  ";
+            String query="SELECT * FROM  comment WHERE ID_video=? " ;
+            ArrayList<Comment>comments=new ArrayList<>();
+            try {
+                //comment		witerer	ID_video	like	dislike
+               ResultSet resultSet= statement.executeQuery(query);
+               while (resultSet .next()){
+                    String comment =resultSet.getString("comment");
+                    String witer =resultSet.getString("witerer");
+                   String ID_video =resultSet.getString("ID_video");
+                   int like =resultSet.getInt("like");
+                   int dislike=resultSet.getInt("dislike");
+                   String time =resultSet.getString("Time");
+                   String UserID =resultSet.getString("UserID");
+
+
+
+                   comments.add(new Comment(comment,UserID,witer,ID_video,time,like,dislike));
+               }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+
             EncConnection();
-            return null;
+            return comments;
 
         }
         public static ArrayList<PlayList>getPlayList(){
 
             StartConnection();
+
             EncConnection();
             return null;
 
         }
-        //Path
-        //ID_video
-        //Chanel_ID
-        //time_uplode
-        //view
-        //PlayTime
-        //like
-        //Dis_like
-        //name
-        //information
-//        public static ArrayList<Video> getListVideoByCategory(String category) {
-//            ArrayList<Video> videos = new ArrayList<>();
-//            StartConnection();
-//
-//            String query = "SELECT * FROM video RIGHT JOIN category_video ON video.ID_video = category_video.ID_vidoe WHERE category_video.ID = ?";
-//            try {
-//                PreparedStatement ps = connection.prepareStatement(query);
-//                ps.setString(1, category);
-//                ResultSet resultSet = ps.executeQuery();
-//                while (resultSet.next()) {
-//                    String path = resultSet.getString("path");
-//                    String ID_video = resultSet.getString("ID_video");
-//                    String Chanel_ID = resultSet.getString("Chanel_ID");
-//                    String time_uplode = resultSet.getString("time_uplode");
-//                    int view = resultSet.getInt("view");
-//                    int PlayTime = resultSet.getInt("PlayTime");
-//                    int like = resultSet.getInt("like");
-//                    int Dis_like = resultSet.getInt("Dis_like");
-//                    String name = resultSet.getString("name");
-//                    String information = resultSet.getString("information");
-//                    videos.add(new Video(path, ID_video, Chanel_ID, name, information, time_uplode, PlayTime, like, Dis_like, view));
-//                }
-//                EncConnection();
-//            } catch (Exception e) {
-//                // Handle the exception properly
-//                throw new RuntimeException(e);
-//            }
-//            return videos;
-//        }
+
 
 
     public static ArrayList<Video> getListVideoByCategory(String category) {
@@ -222,6 +208,13 @@ public class DataBaseManager {
         }
         return videos;
     }
+
+
+
+
+
+
+
         /** insert method*/
         //insert User in chanel TODO check in User
         public static void insertUser(User  user){
