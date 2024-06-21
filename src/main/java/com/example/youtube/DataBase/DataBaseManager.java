@@ -81,6 +81,8 @@ public class DataBaseManager {
 
     //getChannel with  0= username  1=UUID
     //table  ID_chanel	Name	information	image	username
+
+
     public static Channel getChannel(String identifier, int number) {
         StartConnection();
         String query;
@@ -437,7 +439,6 @@ public class DataBaseManager {
         StartConnection();
         String query = "UPDATE User SET username = '%s', Email = '%s', passWord = '%s', Contry = '%s' WHERE IDuser = '%s'";
         query = String.format(query, user.getUsername(), user.getEmail(), user.getPassword(), user.getCountry(), user.getID());
-
         try {
             statement.execute(query);
         } catch (SQLException e) {
@@ -446,6 +447,23 @@ public class DataBaseManager {
 
         EncConnection();
     }
+
+
+    public static void UpdateChanelInfromation(Channel channel){
+        StartConnection();
+        String query = "UPDATE Chanel SET username = '%s', image = '%s', Name  = '%s', information = '%s' WHERE ID_chanel = '%s'";
+        query = String.format(query, channel.getUsername(), channel.getImage(), channel.getDescription(), channel.getName(), channel.getId());
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        EncConnection();
+
+    }
+
+
 
 
 

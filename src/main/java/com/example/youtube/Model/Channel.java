@@ -16,6 +16,10 @@ public class Channel {
         this.setImage(image);
     }
 
+    public Channel() {
+
+    }
+
     public String getId() {
         return id;
     }
@@ -30,7 +34,6 @@ public class Channel {
 
     public void changeDescription(String description) {
         this.description = description;
-        //add database method
     }
 
     public void changeName(String name) {
