@@ -114,10 +114,6 @@ public class DataBaseManager {
 
 
     //this is for get video from chanel ALL
-    //ID_video	Chanel_ID	time_uplode	view	PlayTime	like	Dis_like	name	information	category
-    //                      1       2           3
-    //    public Video(String ID,String name,String description,String uplaodTime,
-    //                  Integer duration,Integer like,Integer deslike,Integer view)
     public static ArrayList<Video> getList_video(String chanel) {
         ArrayList<Video> videos = new ArrayList<>();
         StartConnection();
@@ -356,6 +352,30 @@ public class DataBaseManager {
 
 
     }
+
+
+
+
+
+    public static boolean AddPlayList(String IDP,String IDC){
+        StartConnection();
+        String query="INSERT INTO joinplaylistto_chanel (ID_Playlist,ID_chanel) VALUES ('%s','%s')";
+        query=String.format(query,IDP,IDC);
+        try {
+            statement.execute(query);
+
+        } catch (SQLIntegrityConstraintViolationException er) {
+            return false;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        EncConnection();
+        return true;
+    }
+
+
+
 
 
     /**
