@@ -177,6 +177,12 @@ public class DataBaseManager {
     public static ArrayList<PlayList> getPlayList() {
 
         StartConnection();
+        String query = "SELECT * FROM playlist     JOIN  category_video ON video.ID_video = category_video.ID_video WHERE category_video.category=? ";
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         EncConnection();
         return null;
@@ -374,10 +380,6 @@ public class DataBaseManager {
         return true;
     }
 
-
-
-
-
     /**
      * delete
      */
@@ -480,6 +482,24 @@ public class DataBaseManager {
         }
 
         EncConnection();
+
+    }
+    public static boolean UpdatPlayListInfromation(PlayList playList){
+        StartConnection();
+        String query = "UPDATE playList SET name ='%s' ,discribe ='%s' WHERE ID_Playlist='%s'";
+        query = String.format(query, playList.getName(), playList.getDescription(), playList.getID());
+        try {
+            statement.execute(query);
+            EncConnection();
+            return true;
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        EncConnection();
+        return false;
 
     }
 
