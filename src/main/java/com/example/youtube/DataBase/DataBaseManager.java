@@ -5,6 +5,7 @@ import com.example.youtube.Model.*;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -380,6 +381,28 @@ public class DataBaseManager {
         return true;
     }
 
+
+
+
+    public static boolean insertIntoHistory (String IDV,String IDU){
+        StartConnection();
+        String query="INSERT INTO viode_history (IDUser,IDVideo,Time) VALUES ('%s','%s','%s')";
+        LocalDateTime localDate= LocalDateTime.now();
+        query=String.format(query,IDV,IDU,String.valueOf(localDate));
+        try {
+            statement.execute(query);
+
+        } catch (SQLIntegrityConstraintViolationException er) {
+            return false;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        EncConnection();
+        return true;
+
+    }
+
     /**
      * delete
      */
@@ -449,6 +472,55 @@ public class DataBaseManager {
             throw new RuntimeException(e);
         }
         EncConnection();
+    }
+
+    public static boolean deleteFormHistory(String IDU, String IDV, String action, int Min) {
+        StartConnection();
+        String query = "";
+
+        if (action.equals("1")) {
+            query = "DELETE FROM viode_history WHERE IDVideo = ? AND idUser = ?";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, IDV);
+                ps.setString(2, IDU);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (action.equals("2")) {
+            query = "DELETE FROM viode_history WHERE idUser = ?";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, IDU);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (action.equals("3")) {
+            query = "SELECT * FROM viode_history WHERE idUser = ?";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, IDU);
+                try (ResultSet resultSet = ps.executeQuery()) {
+                    while (resultSet.next()) {
+                        LocalDateTime localDateTime = LocalDateTime.parse(resultSet.getString("Time"));
+                        int hourDiff = LocalDateTime.now().getMinute() - localDateTime.getMinute();
+                        System.out.println(hourDiff);
+                        if (hourDiff > Min) {
+                            String deleteQuery = "DELETE FROM viode_history WHERE IDVideo = ? AND idUser = ?";
+                            try (PreparedStatement deletePs = connection.prepareStatement(deleteQuery)) {
+                                deletePs.setString(1, resultSet.getString("IDVideo"));
+                                deletePs.setString(2, resultSet.getString("idUser"));
+                                deletePs.executeUpdate();
+                            }
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        EncConnection();
+        return true;
     }
 
 
