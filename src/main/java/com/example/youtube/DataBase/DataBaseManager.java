@@ -403,6 +403,56 @@ public class DataBaseManager {
 
     }
 
+    public static boolean addToSubscriber(String IDU,String IDC,int Identifier){
+        StartConnection();
+        String query;
+        if(checkINFollwer(IDU,IDC,Identifier)) {
+            if (Identifier == 1) {
+                query = "INSERT INTO follower (IDChanel,IDuser) VALUES ('%s','%s')";
+            } else
+                query = "INSERT  INTO following  (IDChanel,IDuser) VALUES ('%s','%s')";
+
+        query=String.format(query,IDC,IDU);
+        try {
+            statement.execute(query);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        }
+
+        EncConnection();
+        return true;
+
+    }
+
+    private  static boolean checkINFollwer(String IDU,String IDC,int Identifier) {
+        String query;
+
+        if (Identifier==1) {
+            query = "SELECT * FROM follower WHERE IDChanel='%s' AND IDuser ='%s'";
+        }else{
+             query = "SELECT * FROM following WHERE IDChanel='%s' AND IDuser ='%s'";
+
+        }
+        query=String.format(query,IDC,IDU);
+        try {
+          ResultSet resultSet=  statement.executeQuery(query);
+          if (!resultSet.next()){
+              System.out.println("1231231");
+              return true;
+          }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+
+    }
+
+
     /**
      * delete
      */
@@ -560,6 +610,25 @@ public class DataBaseManager {
         StartConnection();
         String query = "UPDATE playList SET name ='%s' ,discribe ='%s' WHERE ID_Playlist='%s'";
         query = String.format(query, playList.getName(), playList.getDescription(), playList.getID());
+        try {
+            statement.execute(query);
+            EncConnection();
+            return true;
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        EncConnection();
+        return false;
+
+    }
+
+    public static boolean UpdatChanelInfromation(Channel channel){
+        StartConnection();
+        String query = "UPDATE chanel SET Name ='%s' ,information ='%s' ,image ='%s',username ='%s'  WHERE ID_chanel='%s'";
+        query = String.format(query, channel.getName(), channel.getDescription(), channel.getImage(),channel.getUsername(),channel.getId());
         try {
             statement.execute(query);
             EncConnection();
