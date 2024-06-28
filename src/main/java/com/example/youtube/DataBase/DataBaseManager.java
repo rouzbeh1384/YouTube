@@ -270,11 +270,8 @@ public class DataBaseManager {
         return true;
 
     }
-
-
     //insert video in
     public static boolean insertVideo(Video video) {
-
         StartConnection();
         for (String x : video.getHashtagsList()) {
             String query1 = "INSERT INTO category_video (category,ID_video) " +
@@ -289,7 +286,6 @@ public class DataBaseManager {
                 throw new RuntimeException(e);
             }
         }
-
 
         String query = "INSERT INTO video (Path, ID_video, Chanel_ID, time_uplode, view, PlayTime, `like`, Dis_like, name, information) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -314,8 +310,6 @@ public class DataBaseManager {
         EncConnection();
         return true;
     }
-
-
     public static boolean insertPLayList(PlayList playList) {
         StartConnection();
         String query = "INSERT INTO playList (ID_PlayList,name,discribe) values ('%s','%s','%s')";
@@ -333,7 +327,6 @@ public class DataBaseManager {
         return true;
 
     }
-
     public static boolean insertComment(Comment comment, String wirter) {
 
         StartConnection();
@@ -359,11 +352,6 @@ public class DataBaseManager {
 
 
     }
-
-
-
-
-
     public static boolean AddPlayList(String IDP,String IDC){
         StartConnection();
         String query="INSERT INTO joinplaylistto_chanel (ID_Playlist,ID_chanel) VALUES ('%s','%s')";
@@ -380,10 +368,6 @@ public class DataBaseManager {
         EncConnection();
         return true;
     }
-
-
-
-
     public static boolean insertIntoHistory (String IDV,String IDU){
         StartConnection();
         String query="INSERT INTO viode_history (IDUser,IDVideo,Time) VALUES ('%s','%s','%s')";
@@ -412,14 +396,14 @@ public class DataBaseManager {
             } else
                 query = "INSERT  INTO following  (IDChanel,IDuser) VALUES ('%s','%s')";
 
-        query=String.format(query,IDC,IDU);
-        try {
-            statement.execute(query);
+            query=String.format(query,IDC,IDU);
+            try {
+                statement.execute(query);
 
-        }catch (SQLException e){
-            e.printStackTrace();
-            return false;
-        }
+            }catch (SQLException e){
+                e.printStackTrace();
+                return false;
+            }
         }
 
         EncConnection();
@@ -572,6 +556,29 @@ public class DataBaseManager {
         EncConnection();
         return true;
     }
+    public static boolean UnFollow(String IDU,String IDC,int Identifier){
+        StartConnection();
+        String query ;
+        if (Identifier == 1) {
+            query = "DELETE FROM follower WHERE IDuser='%s' AND IDChanel='%s'";
+        } else
+            query = "DELETE FROM following  WHERE IDuser='%s'AND IDChanel='%s'";
+        query=String.format(query,IDU,IDC);
+
+        try {
+            statement.execute(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+
+        }
+        EncConnection();
+        return true;
+
+
+    }
+
+
 
 
     /**
