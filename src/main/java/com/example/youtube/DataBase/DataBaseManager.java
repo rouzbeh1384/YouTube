@@ -54,7 +54,7 @@ public class DataBaseManager {
      */
 
     // getUser form database
-    public static User getUser(String name, String passWord) {
+    public static synchronized User get_User(String name, String passWord) {
         StartConnection();
         String query = "SELECT * FROM User WHERE username='%s' AND passWord='%s'";
         try {
@@ -81,10 +81,7 @@ public class DataBaseManager {
 
 
     //getChannel with  0= username  1=UUID
-    //table  ID_chanel	Name	information	image	username
-
-
-    public static Channel getChannel(String identifier, int number) {
+    public static synchronized Channel get_Channel(String identifier, int number) {
         StartConnection();
         String query;
         if (number == 0) {
@@ -108,14 +105,16 @@ public class DataBaseManager {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            EncConnection();
         }
-        EncConnection();
         return null;
     }
 
 
+
     //this is for get video from chanel ALL
-    public static ArrayList<Video> getList_video(String chanel) {
+    public static synchronized ArrayList<Video> getList_video(String chanel) {
         ArrayList<Video> videos = new ArrayList<>();
         StartConnection();
 
@@ -145,7 +144,7 @@ public class DataBaseManager {
     }
 
 
-    public static ArrayList<Comment> getListComment(String video_ID) {
+    public static synchronized ArrayList<Comment> getListComment(String video_ID) {
 
         //TODO 2 way for this 1-add column in comment table or join with user table
         StartConnection();
@@ -167,15 +166,14 @@ public class DataBaseManager {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            EncConnection();
         }
-
-
-        EncConnection();
         return comments;
 
     }
 
-    public static ArrayList<PlayList> getPlayList() {
+    public static synchronized ArrayList<PlayList> getPlayList() {
 
         StartConnection();
         String query = "SELECT * FROM playlist     JOIN  category_video ON video.ID_video = category_video.ID_video WHERE category_video.category=? ";
@@ -191,7 +189,7 @@ public class DataBaseManager {
     }
 
 
-    public static ArrayList<Video> getListVideoByCategory(String category) {
+    public static synchronized ArrayList<Video> getListVideoByCategory(String category) {
         ArrayList<Video> videos = new ArrayList<>();
         StartConnection();
 
@@ -227,7 +225,7 @@ public class DataBaseManager {
 
 
     //insert User in chanel TODO check in User
-    public static boolean insertUser(User user) {
+    public synchronized static boolean insertUser(User user) {
 
         StartConnection();
         String query = "INSERT INTO user (username, Email, passWord, IDuser, Time, Contry) values ('%s','%s','%s','%s','%s','%s')";
@@ -250,11 +248,11 @@ public class DataBaseManager {
 
     //insert chanel complete
     //String id,String name,String description,String username,String image
-    public static boolean insertChanel(Channel channel) {
+    public synchronized static  boolean insertChanel(Channel channel) {
 
         StartConnection();
-        String query = "INSERT INTO chanel (ID_chanel,Name,information,image,username) VALUES ('%s','%s','%s','%s','%s')";
-        query = String.format(query, channel.getId(), channel.getName(), channel.getDescription(), channel.getImage(), channel.getUsername());
+        String query = "INSERT INTO chanel (ID_chanel,Name,information,image_Chanel,username,Image_Pro,Link) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')";
+        query = String.format(query, channel.getId(), channel.getName(), channel.getDescription(), channel.getImage(), channel.getUsername(),channel.getImage_pro());
         try {
 
             statement.execute(query);
@@ -271,7 +269,7 @@ public class DataBaseManager {
 
     }
     //insert video in
-    public static boolean insertVideo(Video video) {
+    public synchronized static boolean insertVideo(Video video) {
         StartConnection();
         for (String x : video.getHashtagsList()) {
             String query1 = "INSERT INTO category_video (category,ID_video) " +
@@ -387,7 +385,7 @@ public class DataBaseManager {
 
     }
 
-    public static boolean addToSubscriber(String IDU,String IDC,int Identifier){
+    public static boolean addToSubscriberORing(String IDU,String IDC,int Identifier){
         StartConnection();
         String query;
         if(checkINFollwer(IDU,IDC,Identifier)) {
@@ -417,16 +415,16 @@ public class DataBaseManager {
         if (Identifier==1) {
             query = "SELECT * FROM follower WHERE IDChanel='%s' AND IDuser ='%s'";
         }else{
-             query = "SELECT * FROM following WHERE IDChanel='%s' AND IDuser ='%s'";
+            query = "SELECT * FROM following WHERE IDChanel='%s' AND IDuser ='%s'";
 
         }
         query=String.format(query,IDC,IDU);
         try {
-          ResultSet resultSet=  statement.executeQuery(query);
-          if (!resultSet.next()){
-              System.out.println("1231231");
-              return true;
-          }
+            ResultSet resultSet=  statement.executeQuery(query);
+            if (!resultSet.next()){
+                System.out.println("1231231");
+                return true;
+            }
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -608,12 +606,12 @@ public class DataBaseManager {
             statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            EncConnection();
         }
 
-        EncConnection();
-
     }
-    public static boolean UpdatPlayListInfromation(PlayList playList){
+    public static synchronized boolean UpdatPlayListInfromation(PlayList playList){
         StartConnection();
         String query = "UPDATE playList SET name ='%s' ,discribe ='%s' WHERE ID_Playlist='%s'";
         query = String.format(query, playList.getName(), playList.getDescription(), playList.getID());
@@ -625,9 +623,9 @@ public class DataBaseManager {
         } catch (SQLException e) {
 
             e.printStackTrace();
+        }finally {
+            EncConnection();
         }
-
-        EncConnection();
         return false;
 
     }
@@ -646,10 +644,22 @@ public class DataBaseManager {
             e.printStackTrace();
         }
 
-        EncConnection();
+
+
         return false;
 
     }
+
+    /**
+     Search  in data base
+     *
+     */
+
+
+
+
+
+
 
 
 

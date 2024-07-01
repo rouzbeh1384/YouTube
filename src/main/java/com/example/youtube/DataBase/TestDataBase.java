@@ -25,7 +25,21 @@ public class TestDataBase {
 //        a.changeDescription("this is test for chane the information ");
 //    UpdateChanelInfromation(a);
 
-        AddPlayList("!2","!@");
+//        UpdatPlayListInfromation(new PlayList("re","ee","dsad","this is text"));
+
+//        insertIntoHistory("12","11");
+//
+//        insertIntoHistory("12","1");
+//
+//        insertIntoHistory("1","2");
+
+//        AddPlayList("!2","!@");
+//        deleteFormHistory("12","12","3",0);
+//        UpdatChanelInfromation(new Channel("123","12","12","12","12"));
+
+//        addToSubscriber("222","12",2 );
+//        UnFollow("12","12",1);
+
 //         deleteUser("12122","12");
 //        deleteUser("12","1");
 //        deleteVideo("12","12");

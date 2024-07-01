@@ -4,7 +4,10 @@ public class Channel {
     private String id;
     private String name;
     private String description;
-    private String image;
+    private String image_Chane=null;
+
+    private String image_pro=null;
+
 
     private String username;
 
@@ -51,10 +54,18 @@ public class Channel {
     }
 
     public String getImage() {
-        return image;
+        return image_Chane;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image_Chane = image;
+    }
+
+    public String getImage_pro() {
+        return image_pro;
+    }
+
+    public void setImage_pro(String image_pro) {
+        this.image_pro = image_pro;
     }
 }
