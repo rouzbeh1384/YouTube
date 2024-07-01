@@ -1,9 +1,6 @@
 package com.example.youtube.Model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.UUID;
 
 public class User {
     /*  this is user class */
@@ -19,7 +16,7 @@ public class User {
     public User(String username,String email,String date,String passWord,String country,String ID)
     {
      this.username=username;
-     this.date=LocalDate.parse(date);
+     this.setDate(LocalDate.parse(date));
      this.email=email;
      this.password=passWord;
      this.country=country;
@@ -60,5 +57,13 @@ public class User {
         this.username = username;
         //add database method
         // you should know this is unique
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

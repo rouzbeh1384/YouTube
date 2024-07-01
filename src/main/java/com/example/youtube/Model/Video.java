@@ -1,34 +1,35 @@
 package com.example.youtube.Model;
 
-import java.text.DateFormat;
-import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 public class Video {
     private String ID;
     private LocalDate uploadTime;
     private Integer view;
-    private LocalDate duration; //??
+    private Integer duration; //??
     private Integer like;
     private Integer deslike;
     private String name;
     private String description;
-    private ArrayList<String> hashtags;
-    private Video(String ID,String name,String description,String uplaodTime,
-                  String duration,Integer like,Integer deslike,Integer view,String hashtags) {
+    private ArrayList<String> category;
+    private String path;
+
+    private String IDChanel;
+    public Video(String path,String ID,String idchal,String name,String description,String uplaodTime,
+                  Integer duration,Integer like,Integer deslike,Integer view) {
         this.name = name;
         this.description = description;
         this.view = view;
         this.like = like;
         this.deslike = deslike;
         this.uploadTime = LocalDate.parse(uplaodTime);
-        this.duration=LocalDate.parse(duration); //format???
+        this.duration=duration; //format???
         this.ID=ID;
-        this.hashtags=new ArrayList<>(Arrays.asList(hashtags.split(",")));
+        this.IDChanel=idchal;
+        this.setPath(path);
+        this.category=new ArrayList<>();
+
     }
 
     public String getID() {
@@ -51,11 +52,11 @@ public class Video {
         return like;
     }
 
-    public Integer getView() {
+    public int  getView() {
         return view;
     }
 
-    public LocalDate getDuration() {
+    public int  getDuration() {
         return duration;
     }
 
@@ -64,7 +65,7 @@ public class Video {
     }
 
     public ArrayList<String> getHashtagsList() {
-        return hashtags;
+        return getCategory();
     }
 
     public void editName(String name) {
@@ -88,16 +89,40 @@ public class Video {
     }
 
     public void addHashtags(String hashtag) {
-        this.hashtags.add(hashtag);
+        this.getCategory().add(hashtag);
     }
     public void removeHashtag(String hashtag){
-        this.hashtags.remove(hashtag);
+        this.getCategory().remove(hashtag);
     }
     public String getHashtagString(){
         String hashtags="";
-        for(String hashtag : this.hashtags){
+        for(String hashtag : this.getCategory()){
              hashtags += hashtag+",";
         }
         return (hashtags.substring(0,hashtags.length()-1)); // -1 or -2 ??
+    }
+
+    public String getIDChanel() {
+        return IDChanel;
+    }
+
+    public void setIDChanel(String IDChanel) {
+        this.IDChanel = IDChanel;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public ArrayList<String> getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category.add( category);
     }
 }
